@@ -272,13 +272,9 @@ EXPORT_SYMBOL_GPL(usb_find_alt_setting);
 struct usb_interface *usb_ifnum_to_if(const struct usb_device *dev,
 				      unsigned ifnum)
 {
-	struct usb_host_config *config = NULL;
+	struct usb_host_config *config = dev->actconfig;
 	int i;
 
-	if (!dev)
-		return NULL;
-	
-	config = dev->actconfig;
 	if (!config)
 		return NULL;
 	for (i = 0; i < config->desc.bNumInterfaces; i++)
